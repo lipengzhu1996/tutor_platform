@@ -29,7 +29,7 @@ class TutorInfoCard extends React.PureComponent {
                                     <StarFilled style={{ color: '#fadb14' }} />
                                     <StarOutlined style={{ color: '#fadb14' }} />
                                 </Space>
-                                <Title level={5} >4.35</Title>
+                                <Title level={5} >4.55</Title>
                             </Space>
                             <Space direction='vertical' size={0} align='center'>
                                 <Text>123 lessons</Text>
