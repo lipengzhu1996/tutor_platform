@@ -3,12 +3,11 @@
 import React from 'react';
 import { enquireScreen } from 'enquire-js';
 import { Layout, Divider } from 'antd';
+import qs from 'query-string';
 
-import Teams3 from './Teams3';
 import SideFilter from './SideFilter';
 import TopFilter from './TopFilter';
 
-import { Teams30DataSource } from './data.source';
 import './less/antMotionStyle.less';
 import TutorInfoCard from './TutorInfoCard';
 
@@ -30,6 +29,7 @@ export default class Home extends React.Component {
     this.state = {
       isMobile,
       show: !location.port, // 如果不是 dva 2.0 请删除
+      filter: qs.parse(this.props.searchString)
     };
   }
 
@@ -57,7 +57,8 @@ export default class Home extends React.Component {
   };
 
   render() {
-    const { setTutorFilter, filter } = this.props;
+    const { setTutorFilter } = this.props;
+    const { filter } = this.state;
     const children = [
       <Layout className="site-layout-background" >
         <Sider className="site-layout-background" width={300}>

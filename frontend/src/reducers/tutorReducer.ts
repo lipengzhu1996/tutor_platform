@@ -4,7 +4,7 @@ export const DEFAULT_LESSON_TYPE = 'Online'
 export const DEAFULT_HOURLY_RATE = [20, 50];
 export const DEFAULT_AVAILABILITY = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 export const DEFAULT_GENDER = ['Male', 'Female']
-export const STUDENT_LEVEL = ['Any', 'Elementary', 'Middle School', 'High School', 'College', 'Adult']
+export const STUDENT_LEVELS = ['Any', 'Elementary', 'Middle School', 'High School', 'College', 'Adult']
 export const DEFAULT_STUDENT_LEVEL = 'Any'
 
 export type tutorStateType = {

@@ -1,36 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addTutor, getAllTutors, queryTutors } from '../actions/tutorActions';
+import { setTutorFilter } from '../actions/tutorActions';
 import { tutorStateType } from '../reducers/tutorReducer';
 import App from './Home';
 
 type Props = {
   count: number,
-  addTutor: () => void
-  getAllTutors: () => void,
-  queryTutors: (query: Object) => void,
+  filter: any,
+  setTutorFilter: (filter: any) => void,
   history: any,
 }
 
-type State = {
-  todos: Array<{ name: string }>
-}
-
-class HomePageContainer extends Component<Props, State> {
-  state = {
-    todos: [{ name: 'test' }, { name: '222' }]
-  }
-  onClickSearch = (query: string) => {
-    console.log(query);
-    this.props.history.push({
-      pathname: '/tutors',
-      search: '?query=name'
-    });
-    this.props.queryTutors({ subjects:query });
-  }
+class HomePageContainer extends Component<Props> {
   render() {
     return (
-      <App searchTutors={this.onClickSearch} />
+      <App
+        filter={this.props.filter}
+        history={this.props.history}
+        setTutorFilter={this.props.setTutorFilter}
+      />
     );
   }
 }
@@ -38,13 +26,12 @@ class HomePageContainer extends Component<Props, State> {
 const mapStateToProps = (state: { tutors: tutorStateType }) => {
   return {
     count: state.tutors.tutorCount,
+    filter: state.tutors.filter,
   }
 }
 
 const mapDispatchToProps = {
-  addTutor,
-  getAllTutors,
-  queryTutors
+  setTutorFilter,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePageContainer)

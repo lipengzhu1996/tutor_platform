@@ -2,6 +2,7 @@
 /* eslint arrow-parens: 0 */
 import React from 'react';
 import { enquireScreen } from 'enquire-js';
+import qs from 'query-string';
 
 import Banner0 from './Banner0';
 import Teams2 from './Teams2';
@@ -52,6 +53,19 @@ export default class Home extends React.Component {
     /* 如果不是 dva 2.0 请删除 end */
   }
 
+  _onClickSearch = (subject) => {
+    const newFilter = {
+      ...this.props.filter,
+      subject
+    }
+    this.props.setTutorFilter(newFilter)
+    const searchString = qs.stringify(newFilter);
+    this.props.history.push({
+      pathname: '/tutors',
+      search: searchString
+    });
+  }
+
   render() {
     const children = [
       <Banner0
@@ -59,7 +73,7 @@ export default class Home extends React.Component {
         key="Banner0_0"
         dataSource={Banner00DataSource}
         isMobile={this.state.isMobile}
-        searchTutors={this.props.searchTutors}
+        searchTutors={this._onClickSearch}
       />,
       <Teams2
         id="Teams2_0"

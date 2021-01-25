@@ -1,11 +1,9 @@
 import React from 'react';
 import { Menu, Slider, Checkbox, Typography, Space, Select } from 'antd';
 import {
-    DEAFULT_HOURLY_RATE,
     DEFAULT_AVAILABILITY,
     DEFAULT_GENDER,
-    STUDENT_LEVEL,
-    DEFAULT_STUDENT_LEVEL
+    STUDENT_LEVELS,
 } from '../../reducers/tutorReducer'
 
 const { Option } = Select;
@@ -13,7 +11,7 @@ const { Text } = Typography;
 
 class SideFilter extends React.PureComponent {
     state = {
-        hourlyRate: DEAFULT_HOURLY_RATE,
+        hourlyRate: [this.props.filter.minHourlyRate, this.props.filter.maxHourlyRate],
     }
 
     render() {
@@ -31,7 +29,7 @@ class SideFilter extends React.PureComponent {
                         range
                         max={200}
                         imn={0}
-                        defaultValue={DEAFULT_HOURLY_RATE}
+                        defaultValue={[this.props.filter.minHourlyRate, this.props.filter.maxHourlyRate]}
                         disabled={false}
                         onAfterChange={value => {
                             this.setState({ hourlyRate: value })
@@ -51,7 +49,7 @@ class SideFilter extends React.PureComponent {
                                 availability: value,
                             })
                         }}
-                        defaultValue={DEFAULT_AVAILABILITY}>
+                        defaultValue={this.props.filter.availability}>
                         <Space direction="vertical">
                             {DEFAULT_AVAILABILITY.map(day => {
                                 return (
@@ -70,7 +68,7 @@ class SideFilter extends React.PureComponent {
                                 gender: value,
                             })
                         }}
-                        defaultValue={DEFAULT_GENDER}>
+                        defaultValue={this.props.filter.gender}>
                         <Space direction="vertical">
                             {DEFAULT_GENDER.map(gender =>
                                 <Checkbox value={gender}><Text style={{ color: '#d9d9d9' }}>{gender}</Text></Checkbox>
@@ -81,14 +79,14 @@ class SideFilter extends React.PureComponent {
                 <Menu.ItemGroup key="g4" title={'Student\'s level'}>
                     <Select
                         style={{ margin: '16px 16px', width: 240 }}
-                        defaultValue={DEFAULT_STUDENT_LEVEL}
+                        defaultValue={this.props.filter.studentsLevel}
                         onChange={value => {
                             this.props.setTutorFilter({
                                 ...this.props.filter,
                                 studentsLevel: value,
                             })
                         }}>
-                        {STUDENT_LEVEL.map(level =>
+                        {STUDENT_LEVELS.map(level =>
                             <Option value={level}>{level}</Option>
                         )}
                     </Select>

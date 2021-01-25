@@ -8,21 +8,16 @@ type Props = {
   count: number,
   filter: any,
   history: any,
+  location: any,
   queryTutors: (filter: any) => void
 }
 
-type State = {
-  todos: Array<{ name: string }>
-}
-
-class TutorListContainer extends Component<Props, State> {
-  state = {
-    todos: [{ name: 'test' }, { name: '222' }]
-  }
+class TutorListContainer extends Component<Props> {
 
   render() {
     return (
       <App
+        searchString={this.props.location.search}
         filter={this.props.filter}
         setTutorFilter={this.props.queryTutors}
       />

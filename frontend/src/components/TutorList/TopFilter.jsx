@@ -2,9 +2,6 @@ import React from 'react';
 import { Typography, Space, Select, Radio, Row, Col, Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 
-import {
-    DEFAULT_LESSON_TYPE,
-} from '../../reducers/tutorReducer'
 import { Subjects } from '../../constants/constants.js';
 
 const { Option } = Select;
@@ -15,11 +12,10 @@ const LESSON_TYPE = ['Online', 'In-person']
 class TopFilter extends React.PureComponent {
     state = {
         subject: this.props.filter.subject,
-        lessonType: DEFAULT_LESSON_TYPE
+        lessonType: this.props.filter.lessonType
     }
 
     render() {
-        console.log(this.props.filter)
         return (
             <Row justify="space-around">
                 <Col >
@@ -29,6 +25,7 @@ class TopFilter extends React.PureComponent {
                         <Select
                             showSearch
                             style={{ margin: '0 16px', width: 300 }}
+                            defaultValue={this.props.filter.subject}
                             placeholder="Select a subject"
                             optionFilterProp="children"
                             onChange={(value) => { this.setState({ subject: value }) }}
@@ -40,7 +37,11 @@ class TopFilter extends React.PureComponent {
                             {Subjects.map(subject => <Option value={subject}>{subject}</Option>)}
                         </Select>
                         <Title level={5}>Lesson Type:</Title>
-                        <Radio.Group defaultValue={DEFAULT_LESSON_TYPE} size="large" style={{ margin: '0 16px' }}>
+                        <Radio.Group
+                            defaultValue={this.props.filter.lessonType}
+                            size="large"
+                            style={{ margin: '0 16px' }}
+                            onChange={(value) => { this.setState({ lessonType: value }) }}>
                             {LESSON_TYPE.map(lesson => <Radio.Button value={lesson}>{lesson}</Radio.Button>)}
                         </Radio.Group>
                     </Space>
