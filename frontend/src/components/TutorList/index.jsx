@@ -49,6 +49,14 @@ export default class Home extends React.Component {
       }, 500);
     }
     /* 如果不是 dva 2.0 请删除 end */
+    this.props.queryTutors(this.props.filter)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.filter !== prevProps.filter) {
+      this.props.queryTutors(this.props.filter)
+      this.setState({ filter: qs.parse(this.props.searchString) })
+    }
   }
 
   onCollapse = collapsed => {
@@ -56,20 +64,29 @@ export default class Home extends React.Component {
     this.setState({ collapsed });
   };
 
+  _onFilterChange = (filter) => {
+    this.props.setTutorFilter(filter)
+    const searchString = qs.stringify(filter);
+    this.props.history.push({
+      pathname: '/tutors',
+      search: searchString
+    });
+  }
+
   render() {
-    const { setTutorFilter } = this.props;
+    console.log(this.props.tutors)
     const { filter } = this.state;
     const children = [
       <Layout className="site-layout-background" >
         <Sider className="site-layout-background" width={300}>
           <SideFilter
             filter={filter}
-            setTutorFilter={setTutorFilter} />
+            setTutorFilter={this._onFilterChange} />
         </Sider>
         <Content style={{ padding: '0 24px', minHeight: 280 }}>
           <TopFilter
             filter={filter}
-            setTutorFilter={setTutorFilter} />
+            setTutorFilter={this._onFilterChange} />
           <Divider key="divider" />
           <TutorInfoCard />
         </Content>

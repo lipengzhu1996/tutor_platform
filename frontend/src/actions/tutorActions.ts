@@ -13,6 +13,13 @@ export function setTutorFilter(filter: any) {
     }
 }
 
+export function setTutorQueryResult(tutors: Array<any>) {
+    return {
+        type: ActionType.SET_TUTOR_QUERY_RESULT,
+        payload: { tutors: tutors }
+    }
+}
+
 const testData = {
     id: '9527',
     name: 'Tom',
@@ -76,9 +83,8 @@ export function queryTutors(query: any) {
                 return response;
             })
             .then((response) => response.json())
-            .then((items) => { dispatch(setTutorFilter(query)); })
+            .then((items) => { dispatch(setTutorQueryResult(items)); })
             .catch(() => { });
-
     }
 }
 

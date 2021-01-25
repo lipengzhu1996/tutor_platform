@@ -18,6 +18,7 @@ export type tutorStateType = {
         gender: Array<string>,
         studentsLevel: string,
     }
+    tutors: Array<any>
 }
 
 type actionType = {
@@ -35,7 +36,8 @@ export const TUTOR_DEFAULT_STATE: tutorStateType = {
         availability: DEFAULT_AVAILABILITY,
         gender: DEFAULT_GENDER,
         studentsLevel: DEFAULT_STUDENT_LEVEL,
-    }
+    },
+    tutors: []
 }
 
 export default function tutorReducer(state = TUTOR_DEFAULT_STATE, action: actionType) {
@@ -49,6 +51,11 @@ export default function tutorReducer(state = TUTOR_DEFAULT_STATE, action: action
             return {
                 ...state,
                 filter: action.payload.filter
+            }
+        case ActionType.SET_TUTOR_QUERY_RESULT:
+            return {
+                ...state,
+                tutors: action.payload.tutors
             }
         default:
             return state
