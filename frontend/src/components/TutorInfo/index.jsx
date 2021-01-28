@@ -75,7 +75,7 @@ export default class Home extends React.Component {
   render() {
     const children = [
       <Layout className="site-layout-background" >
-        <Sider className="site-layout-background" width={200} style={{ background: '#f0f0f0' }}>
+        <Sider className="site-layout-background" width={220} style={{ background: '#f0f0f0' }}>
           <SideAnchors />
         </Sider>
         <Content style={{ background: '#f0f0f0'}}>

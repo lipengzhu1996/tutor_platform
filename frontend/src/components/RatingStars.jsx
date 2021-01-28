@@ -3,7 +3,7 @@ import { Typography, Space,Rate } from 'antd';
 
 const { Title, Link } = Typography;
 
-class ReviewStars extends React.PureComponent {
+class RatingStars extends React.PureComponent {
     render() {
         const { rate, ratings, href } = this.props;
 
@@ -22,4 +22,4 @@ class ReviewStars extends React.PureComponent {
     }
 }
 
-export default ReviewStars;
+export default RatingStars;
