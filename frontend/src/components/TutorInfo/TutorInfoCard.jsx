@@ -26,11 +26,11 @@ class TutorInfoCard extends React.PureComponent {
             duration: 0,
             style: {
                 width: 200,
-              },
+            },
         });
 
         return (
-            <div style={{ marginBlock: '48px', marginInlineStart: '96px', marginInlineEnd:'250px' }}>
+            <div style={{ marginBlock: '48px', marginInlineStart: '96px', marginInlineEnd: '250px' }}>
                 <div id='title'>
                     <Row>
                         <Col span={6}>
@@ -75,7 +75,7 @@ class TutorInfoCard extends React.PureComponent {
                 <div id='bio'>
                     <Divider />
                     <Title level={3} type='secondary'>Bio</Title>
-                    <Paragraph >
+                    <Paragraph ellipsis={{rows: 4, expandable: true, symbol: 'more'}}>
                         Growing up, math was always my favorite subject. I understand, however,
                         that many students may not have this same understanding of math, perhaps because
                         of the way they were taught in school. This is why I greatly enjoy being a tutor, as I get to guide students as
@@ -84,7 +84,69 @@ class TutorInfoCard extends React.PureComponent {
                         that many students may not have this same understanding of math, perhaps because
                         of the way they were taught in school. This is why I greatly enjoy being a tutor, as I get to guide students as
                         they slowly discover how to problem solve and they get that "aha" moment.
-                </Paragraph>
+                    </Paragraph>
+                </div>
+                <div id='certificates'>
+                    <Divider />
+                    <Title level={3} type='secondary'>Certificates</Title>
+                    <Space direction="vertical" size={0}>
+                        <Space size='small'>
+                            <Text>National Scholarship</Text>
+                            <LikeTwoTone twoToneColor="#eb2f96" />
+                        </Space>
+                        <Space size='small'>
+                            <Text>National Scholarship</Text>
+                            <LikeTwoTone twoToneColor="#eb2f96" />
+                        </Space>
+                    </Space>
+                </div>
+                <div id='price'>
+                    <Divider />
+                    <Title level={3} type='secondary'>Price</Title>
+                    <Space direction="vertical" size={0}>
+                        <Space size='small'>
+                            <Text>Hourly Rate: </Text>
+                            <Text strong>$99</Text>
+                        </Space>
+                        <Space size='small'>
+                            <Text>Free Trial: </Text>
+                            <Text strong>30 mins</Text>
+                        </Space>
+                        <Space size='small'>
+                            <Text>Lesson cancellation: </Text>
+                            <Text strong>24 hours</Text>
+                        </Space>
+                    </Space>
+                </div>
+                <div id='schedule'>
+                    <Divider />
+                    <Title level={3} type='secondary'>Schedule</Title>
+                    <Space direction="vertical" size={0}>
+                        <Space size='small'>
+                            <Text>Sun </Text>
+                            <Text strong>1:00 pm - 8:00 pm</Text>
+                        </Space>
+                        <Space size='small'>
+                            <Text>Mon </Text>
+                            <Text strong>7:00 am - 8:00 pm</Text>
+                        </Space>
+                        <Space size='small'>
+                            <Text>Tue </Text>
+                            <Text strong>7:00 am - 8:00 pm</Text>
+                        </Space>
+                    </Space>
+                </div>
+                <div id='tools'>
+                    <Divider />
+                    <Title level={3} type='secondary'>Tools</Title>
+                    <Space direction="vertical" size={0}>
+                        <Space size='small'>
+                            <Text>Zoom </Text>
+                        </Space>
+                        <Space size='small'>
+                            <Text>Mic </Text>
+                        </Space>
+                    </Space>
                 </div>
             </div>
 
