@@ -20,14 +20,17 @@ class TutorInfoCard extends React.PureComponent {
         notification.open({
             message: 'Book Now!',
             description:
-                'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+                'say something here',
             placement: 'bottomRight',
             btn: contactButton,
-            duration: 0
+            duration: 0,
+            style: {
+                width: 200,
+              },
         });
 
         return (
-            <div style={{ marginBlock: '48px', marginInline: '96px' }}>
+            <div style={{ marginBlock: '48px', marginInlineStart: '96px', marginInlineEnd:'250px' }}>
                 <div id='title'>
                     <Row>
                         <Col span={6}>
@@ -44,20 +47,6 @@ class TutorInfoCard extends React.PureComponent {
                             </Space>
                         </Col>
                     </Row>
-                </div>
-                <div id='bio'>
-                    <Divider />
-                    <Title level={3} type='secondary'>Bio</Title>
-                    <Paragraph >
-                        Growing up, math was always my favorite subject. I understand, however,
-                        that many students may not have this same understanding of math, perhaps because
-                        of the way they were taught in school. This is why I greatly enjoy being a tutor, as I get to guide students as
-                        they slowly discover how to problem solve and they get that "aha" moment.
-                        Growing up, math was always my favorite subject. I understand, however,
-                        that many students may not have this same understanding of math, perhaps because
-                        of the way they were taught in school. This is why I greatly enjoy being a tutor, as I get to guide students as
-                        they slowly discover how to problem solve and they get that "aha" moment.
-                </Paragraph>
                 </div>
                 <div id='education'>
                     <Divider />
