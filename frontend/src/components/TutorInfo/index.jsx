@@ -2,11 +2,10 @@
 /* eslint arrow-parens: 0 */
 import React from 'react';
 import { enquireScreen } from 'enquire-js';
-import { Layout, Divider } from 'antd';
+import { Layout } from 'antd';
 import qs from 'query-string';
 
-import SideFilter from './SideFilter';
-import TopFilter from './TopFilter';
+import SideAnchors from './SideAnchors';
 
 import './less/antMotionStyle.less';
 import TutorInfoCard from './TutorInfoCard';
@@ -74,19 +73,12 @@ export default class Home extends React.Component {
   }
 
   render() {
-    const { filter } = this.state;
     const children = [
       <Layout className="site-layout-background" >
-        <Sider className="site-layout-background" width={300}>
-          <SideFilter
-            filter={filter}
-            setTutorFilter={this._onFilterChange} />
+        <Sider className="site-layout-background" width={300} style={{ background: '#002766', minHeight: 280 }}>
+          <SideAnchors />
         </Sider>
-        <Content style={{ padding: '0 24px', minHeight: 280 }}>
-          <TopFilter
-            filter={filter}
-            setTutorFilter={this._onFilterChange} />
-          <Divider key="divider" />
+        <Content>
           <TutorInfoCard />
         </Content>
       </Layout>

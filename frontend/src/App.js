@@ -11,6 +11,7 @@ import Header from './components/Home/Nav0';
 import Footer from './components/Home/Footer1';
 import HomePageContainer from './components/HomePageContainer';
 import TutorListContainer from './components/TutorListContainer';
+import TutorInfoContainer from './components/TutorInfoContainer';
 
 import {
   Nav00DataSource,
@@ -40,6 +41,7 @@ class App extends Component {
   render() {
     const homePageComponent = props => <HomePageContainer {...props} />
     const tutorListComponent = props => <TutorListContainer {...props} />
+    const tutorInfoComponent = props => <TutorInfoContainer {...props} />
     return (
       <div>
         <Router>
@@ -47,6 +49,7 @@ class App extends Component {
             <Header dataSource={Nav00DataSource} isMobile={this.isMobile} />
             <Route exact path="/" component={homePageComponent} />
             <Route exact path="/tutors" component={tutorListComponent} />
+            <Route exact path="/tutor" component={tutorInfoComponent} />
             <Footer dataSource={Footer10DataSource} isMobile={this.isMobile} />
           </Provider>
         </Router>
