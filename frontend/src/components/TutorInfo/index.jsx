@@ -28,7 +28,6 @@ export default class Home extends React.Component {
     this.state = {
       isMobile,
       show: !location.port, // 如果不是 dva 2.0 请删除
-      filter: qs.parse(this.props.searchString)
     };
   }
 
@@ -51,26 +50,10 @@ export default class Home extends React.Component {
     this.props.queryTutors(this.props.filter)
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.filter !== prevProps.filter) {
-      this.props.queryTutors(this.props.filter)
-      this.setState({ filter: qs.parse(this.props.searchString) })
-    }
-  }
-
   onCollapse = collapsed => {
     console.log(collapsed);
     this.setState({ collapsed });
   };
-
-  _onFilterChange = (filter) => {
-    this.props.setTutorFilter(filter)
-    const searchString = qs.stringify(filter);
-    this.props.history.push({
-      pathname: '/tutors',
-      search: searchString
-    });
-  }
 
   render() {
     const children = [

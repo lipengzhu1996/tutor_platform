@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Row, Col, Typography, Image, Space, Divider, Input, Select, TimePicker, Checkbox, Upload } from 'antd';
-import { LikeTwoTone,LoadingOutlined } from '@ant-design/icons';
+import { LikeTwoTone, LoadingOutlined } from '@ant-design/icons';
 import { Subjects } from '../../constants/constants'
 
 const { TextArea } = Input;
@@ -8,13 +8,26 @@ const { Title, Text } = Typography;
 const { Option } = Select;
 const { RangePicker } = TimePicker;
 
-class TutorInfoCollection extends React.PureComponent {
-    render() {
-        const children = [];
-        for (let i = 10; i < 36; i++) {
-            children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
-        }
+const TRIALS = ['20 mins', '30 mins']
+const CANCELLATION = ['12 hours', '24 hours']
 
+class TutorInfoCollection extends React.PureComponent {
+    state = {
+        name: '',
+        title: '',
+        subjects: [],
+        subjectToHours: new Map(),
+        bio: '',
+        certificates: '',
+        rate: '',
+        trial: '',
+        cancellation: '',
+        
+    }
+    render() {
+
+        console.log(this.state.subjects)
+        console.log(this.state.subjectToHours)
         return (
             <div style={{ marginBlock: '48px', marginInlineStart: '96px', marginInlineEnd: '250px' }}>
                 <div id='name'>
@@ -29,22 +42,37 @@ class TutorInfoCollection extends React.PureComponent {
                         onChange={() => { }}
                     >
                         <div>
-                            { <LoadingOutlined />}
+                            {<LoadingOutlined />}
                             <div style={{ marginTop: 8 }}>Upload</div>
                         </div>
                     </Upload>
                 </div>
                 <div id='name'>
                     <Title level={5} type='secondary'>Name</Title>
-                    <Input placeholder="Please input your name" />
+                    <Input
+                        placeholder="Please input your name"
+                        value={this.state.name}
+                        onChange={(e) => { this.setState({ name: e.target.value }) }} />
                 </div>
                 <div id='title'>
                     <Title level={5} type='secondary'>Title</Title>
-                    <Input placeholder="Please input your title" />
+                    <Input
+                        placeholder="Please input your title"
+                        value={this.state.title}
+                        onChange={(e) => { this.setState({ title: e.target.value }) }} />
                 </div>
                 <div id='education'>
                     <Title level={5} type='secondary'>Education</Title>
-                    <TextArea rows={4} placeholder="Please input your education information" />
+                    <Space direction="vertical" size={0}>
+                        <Space size='small'>
+                            <Text>School</Text>
+                            <Input />
+                            <Text>School</Text>
+                            <Input />
+                            <Text>School</Text>
+                            <Input />
+                        </Space>
+                    </Space>
                 </div>
                 <div id='subjects'>
                     <Title level={5} type='secondary'>Subjects</Title>
@@ -54,33 +82,64 @@ class TutorInfoCollection extends React.PureComponent {
                         style={{ width: '100%' }}
                         placeholder="Please select subjects"
                         defaultValue={[]}
-                        onChange={() => { }}
+                        value={this.state.subjects}
+                        onChange={(value) => { this.setState({ subjects: value }) }}
                     >
                         {Subjects.map(subject => <Option key={subject}>{subject}</Option>)}
                     </Select>
+                    <Space direction="vertical" size={0}>
+                        {this.state.subjects.map(subject => {
+                            return (
+                                <Space size='small'>
+                                    <Text>{subject}</Text>
+                                    <Input value={this.state.subjectToHours.get(subject)} onChange={(e) => {
+                                        const map = this.state.subjectToHours
+                                        map.set(subject, e.target.value)
+                                        this.setState({ subjectToHours: map })
+                                    }} />
+                                </Space>
+                            )
+                        })}
+                    </Space>
                 </div>
                 <div id='bio'>
                     <Title level={5} type='secondary'>Bio</Title>
-                    <TextArea rows={4} placeholder="Please input your biography" />
+                    <TextArea
+                        rows={4}
+                        placeholder="Please input your biography"
+                        value={this.state.bio}
+                        onChange={(e) => { this.setState({ bio: e.target.value }) }} />
                 </div>
                 <div id='certificates'>
                     <Title level={5} type='secondary'>Certificates</Title>
-                    <TextArea rows={4} placeholder="Please input your certificates" />
+                    <TextArea
+                        rows={4}
+                        placeholder="Please input your certificates"
+                        value={this.state.certificates}
+                        onChange={(e) => { this.setState({ certificates: e.target.value }) }} />
                 </div>
                 <div id='price'>
                     <Title level={5} type='secondary'>Price</Title>
                     <Space direction="vertical" size={0}>
                         <Space size='small'>
                             <Text>Hourly Rate: </Text>
-                            <Text strong>$99</Text>
+                            <Input
+                                prefix="$"
+                                suffix="/Hour"
+                                value={this.state.rate}
+                                onChange={(e) => { this.setState({ rate: e.target.value }) }} />
                         </Space>
                         <Space size='small'>
                             <Text>Free Trial: </Text>
-                            <Text strong>30 mins</Text>
+                            <Select value={this.state.trial} style={{ width: 120 }} onChange={(value) => { this.setState({ trial: value }) }}>
+                                {TRIALS.map(duration => <Option key={duration}>{duration}</Option>)}
+                            </Select>
                         </Space>
                         <Space size='small'>
                             <Text>Lesson cancellation: </Text>
-                            <Text strong>24 hours</Text>
+                            <Select value={this.state.cancellation} style={{ width: 120 }} onChange={(value) => { this.setState({ cancellation: value }) }}>
+                                {CANCELLATION.map(time => <Option key={time}>{time}</Option>)}
+                            </Select>
                         </Space>
                     </Space>
                 </div>
@@ -108,7 +167,6 @@ class TutorInfoCollection extends React.PureComponent {
                 </div>
 
             </div>
-
         );
     }
 }
