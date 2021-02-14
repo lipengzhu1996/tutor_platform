@@ -12,6 +12,7 @@ import Footer from './components/Home/Footer1';
 import HomePageContainer from './components/HomePageContainer';
 import TutorListContainer from './components/TutorListContainer';
 import TutorInfoContainer from './components/TutorInfoContainer';
+import TutorRegistrationContainer from './components/TutorRegistrationContainer';
 
 import {
   Nav00DataSource,
@@ -42,6 +43,8 @@ class App extends Component {
     const homePageComponent = props => <HomePageContainer {...props} />
     const tutorListComponent = props => <TutorListContainer {...props} />
     const tutorInfoComponent = props => <TutorInfoContainer {...props} />
+    const tutorRegistrationComponent = props => <TutorRegistrationContainer {...props} />
+
     return (
       <div>
         <Router>
@@ -50,6 +53,7 @@ class App extends Component {
             <Route exact path="/" component={homePageComponent} />
             <Route exact path="/tutors" component={tutorListComponent} />
             <Route exact path="/tutor" component={tutorInfoComponent} />
+            <Route exact path="/registration" component={tutorRegistrationComponent} />
             <Footer dataSource={Footer10DataSource} isMobile={this.isMobile} />
           </Provider>
         </Router>
