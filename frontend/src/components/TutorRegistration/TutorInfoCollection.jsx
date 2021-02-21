@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Row, Col, Typography, Image, Space, Divider, Input, Select, TimePicker, Checkbox, Upload } from 'antd';
-import { LikeTwoTone, LoadingOutlined } from '@ant-design/icons';
-import { Subjects } from '../../constants/constants'
+import React from 'react';
+import { Typography, Space, Input, Select, TimePicker, Upload } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Subjects, Weekdays } from '../../constants/constants'
 
 const { TextArea } = Input;
 const { Title, Text } = Typography;
@@ -22,14 +22,12 @@ class TutorInfoCollection extends React.PureComponent {
         rate: '',
         trial: '',
         cancellation: '',
-        
+        schedule: [],
+        scheduleDateToTime: new Map(),
     }
     render() {
-
-        console.log(this.state.subjects)
-        console.log(this.state.subjectToHours)
         return (
-            <div style={{ marginBlock: '48px', marginInlineStart: '96px', marginInlineEnd: '250px' }}>
+            <div style={{ marginBlock: '48px', marginInlineEnd: '96px' }}>
                 <div id='name'>
                     <Title level={5} type='secondary'>Image</Title>
                     <Upload
@@ -92,10 +90,13 @@ class TutorInfoCollection extends React.PureComponent {
                             return (
                                 <Space size='small'>
                                     <Text>{subject}</Text>
-                                    <Input value={this.state.subjectToHours.get(subject)} onChange={(e) => {
-                                        const map = this.state.subjectToHours
-                                        map.set(subject, e.target.value)
-                                        this.setState({ subjectToHours: map })
+                                    <Input suffix="Hours" onChange={(e) => {
+                                        this.setState(prevState => ({
+                                            subjectToHours: {
+                                                ...prevState.subjectToHours,
+                                                [subject]: e.target.value
+                                            }
+                                        }))
                                     }} />
                                 </Space>
                             )
@@ -145,11 +146,36 @@ class TutorInfoCollection extends React.PureComponent {
                 </div>
                 <div id='schedule'>
                     <Title level={5} type='secondary'>Schedule</Title>
+                    <Select
+                        mode="multiple"
+                        allowClear
+                        style={{ width: '100%' }}
+                        placeholder="Please select schedule"
+                        defaultValue={[]}
+                        value={this.state.schedule}
+                        onChange={(value) => { this.setState({ schedule: value }) }}
+                    >
+                        {Weekdays.map(day => <Option key={day}>{day}</Option>)}
+                    </Select>
                     <Space direction="vertical" size={0}>
-                        <Space size='small'>
-                            <Checkbox value="sun">Sun</Checkbox>
-                            <RangePicker />
-                        </Space>
+                        {this.state.schedule.map(day => {
+                            return (
+                                <Space size='small'>
+                                    <Text>{day}</Text>
+                                    <RangePicker
+                                        format={'HH:mm'}
+                                        onChange={(_, timeString) => {
+                                            this.setState(prevState => ({
+                                                scheduleDateToTime: {
+                                                    ...prevState.scheduleDateToTime,
+                                                    [day]: timeString.join(',')
+                                                }
+                                            }))
+                                        }}
+                                    />
+                                </Space>
+                            )
+                        })}
                     </Space>
                 </div>
                 <div id='tools'>

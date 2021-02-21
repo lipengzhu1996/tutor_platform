@@ -3,7 +3,6 @@
 import React from 'react';
 import { enquireScreen } from 'enquire-js';
 import { Layout } from 'antd';
-import qs from 'query-string';
 
 import SideAnchors from './SideAnchors';
 
