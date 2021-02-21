@@ -1,6 +1,6 @@
 import React from 'react';
-import { Typography, Space, Input, Select, TimePicker, Upload } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { Typography, Space, Input, Select, TimePicker, Upload, Button } from 'antd';
+import { LoadingOutlined, UploadOutlined } from '@ant-design/icons';
 import { Subjects, Weekdays } from '../../constants/constants'
 
 const { TextArea } = Input;
@@ -24,6 +24,7 @@ class TutorInfoCollection extends React.PureComponent {
         cancellation: '',
         schedule: [],
         scheduleDateToTime: new Map(),
+        review: ''
     }
     render() {
         return (
@@ -118,6 +119,9 @@ class TutorInfoCollection extends React.PureComponent {
                         placeholder="Please input your certificates"
                         value={this.state.certificates}
                         onChange={(e) => { this.setState({ certificates: e.target.value }) }} />
+                    <Upload name={'file'}>
+                        <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                    </Upload>,
                 </div>
                 <div id='price'>
                     <Title level={5} type='secondary'>Price</Title>
@@ -190,6 +194,14 @@ class TutorInfoCollection extends React.PureComponent {
                     >
                         {Subjects.map(subject => <Option key={subject}>{subject}</Option>)}
                     </Select>
+                </div>
+                <div id='reviews'>
+                    <Title level={5} type='secondary'>Reviews</Title>
+                    <TextArea
+                        rows={4}
+                        placeholder="Please input reviews"
+                        value={this.state.review}
+                        onChange={(e) => { this.setState({ review: e.target.value }) }} />
                 </div>
 
             </div>
