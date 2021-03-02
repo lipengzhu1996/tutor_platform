@@ -18,6 +18,7 @@ import {
   Nav00DataSource,
   Footer10DataSource,
 } from './components/Home/data.source.js';
+import LoginSignupContainer from './components/LoginSignupContainer';
 
 const store = createStore(rootReducer, DEFAULT_STATE, applyMiddleware(thunk))
 
@@ -44,6 +45,7 @@ class App extends Component {
     const tutorListComponent = props => <TutorListContainer {...props} />
     const tutorInfoComponent = props => <TutorInfoContainer {...props} />
     const tutorRegistrationComponent = props => <TutorRegistrationContainer {...props} />
+    const loginComponent = props => <LoginSignupContainer {...props} />
 
     return (
       <div>
@@ -54,6 +56,7 @@ class App extends Component {
             <Route exact path="/tutors" component={tutorListComponent} />
             <Route exact path="/tutor" component={tutorInfoComponent} />
             <Route exact path="/registration" component={tutorRegistrationComponent} />
+            <Route exact path="/log_in" component={loginComponent} />
             <Footer dataSource={Footer10DataSource} isMobile={this.isMobile} />
           </Provider>
         </Router>
